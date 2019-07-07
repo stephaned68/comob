@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Voies" (click)="pathsPage()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let ability of (abilities | async)">
+      <ion-card-header>
+        <ion-card-title>{{ ability.rang }}. {{ ability.nom }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ ability.description }}</ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

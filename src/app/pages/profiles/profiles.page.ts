@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DatasetService } from 'src/app/services/dataset.service';
 import { Observable } from 'rxjs';
-import { ProfileService } from 'src/app/services/profile.service';
+import { ProfileService, Profile } from 'src/app/services/profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profiles',
@@ -15,6 +16,7 @@ export class ProfilesPage implements OnInit {
   public profiles: Observable<any>;
 
   constructor(
+    private router: Router,
     private datasetService: DatasetService,
     private profileService: ProfileService
   ) { }
@@ -26,5 +28,14 @@ export class ProfilesPage implements OnInit {
 
   getProfileList() {
     this.profiles = this.profileService.getProfileList();
+  }
+
+  showPaths(profile: Profile) {
+    this.profileService.selected = profile;
+    this.router.navigateByUrl('/paths');
+  }
+
+  homePage() {
+    this.router.navigateByUrl('/home');
   }
 }

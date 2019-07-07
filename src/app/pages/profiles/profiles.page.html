@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Accueil" (click)="homePage()"></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,7 +10,7 @@
 <ion-content>
   <ion-list>
     <ion-item button="true" *ngFor="let profile of (profiles | async)">
-      <ion-label>{{ profile.nom }}</ion-label>
+      <ion-label (click)="showPaths(profile)">{{ profile.nom }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
