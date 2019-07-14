@@ -22,7 +22,7 @@ export class PathsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title = this.profileService.selected.profil;
+    this.title = this.profileService.selected.nom;
     this.getPathList();
   }
 

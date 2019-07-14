@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class Dataset {
@@ -17,6 +17,8 @@ export class DatasetService {
 
   private datasetURL = 'http://co-api.alwaysdata.net/datasets';
 
+  private resultset = 'rs';
+
   constructor(private http: HttpClient) { }
 
   public datasetList: Array<Dataset> = [];
@@ -25,7 +27,7 @@ export class DatasetService {
 
   public getDatasetList(): Observable<any> {
     return this.http.get(this.datasetURL).pipe(
-      map(results => results['rs'])
+      map(results => results[this.resultset])
     );
   }
 }

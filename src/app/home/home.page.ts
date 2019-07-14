@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatasetService, Dataset } from '../services/dataset.service';
+import { DatasetService, Dataset } from 'src/app/services/dataset.service';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',

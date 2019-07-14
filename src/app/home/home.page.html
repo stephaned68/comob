@@ -9,7 +9,7 @@
 <ion-content>
   <ion-list>
     <ion-item button="true" *ngFor="let dataset of (datasets | async)">
-      <ion-label (click)="showProfiles(dataset)">{{ (dataset.name) }}</ion-label>
+      <ion-label (click)="showProfiles(dataset)">{{ dataset.name }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
