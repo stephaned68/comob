@@ -19,6 +19,8 @@ export class PathService {
 
   private pathURL = 'http://co-api.alwaysdata.net/voies';
 
+  private resultSet = 'rs';
+
   public pathList: Array<Path> = [];
 
   public selected: Path;
@@ -32,7 +34,7 @@ export class PathService {
   public getPathList(): Observable<any> {
     const url = this.pathURL + `/${this.datasetService.selected.dbid}/${this.profileService.selected.profil}`;
     return this.http.get(url).pipe(
-      map(results => results['rs'])
+      map(results => results[this.resultSet])
     );
   }
 }

@@ -17,7 +17,7 @@ export class DatasetService {
 
   private datasetURL = 'http://co-api.alwaysdata.net/datasets';
 
-  private resultset = 'rs';
+  private resultSet = 'rs';
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +27,7 @@ export class DatasetService {
 
   public getDatasetList(): Observable<any> {
     return this.http.get(this.datasetURL).pipe(
-      map(results => results[this.resultset])
+      map(results => results[this.resultSet])
     );
   }
 }

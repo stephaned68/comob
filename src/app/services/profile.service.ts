@@ -17,6 +17,8 @@ export class ProfileService {
 
   private profileURL = 'http://co-api.alwaysdata.net/profils';
 
+  private resultSet = 'rs';
+
   public profileList: Array<Profile> = [];
 
   public selected: Profile;
@@ -29,7 +31,7 @@ export class ProfileService {
   public getProfileList(): Observable<any> {
     const url = this.profileURL + `/${this.datasetService.selected.dbid}`;
     return this.http.get(url).pipe(
-      map(results => results['rs'])
+      map(results => results[this.resultSet])
     );
   }
 }

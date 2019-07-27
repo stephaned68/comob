@@ -22,6 +22,8 @@ export class AbilityService {
 
   private abilityURL = 'http://co-api.alwaysdata.net/capacites';
 
+  private resultSet = 'rs';
+
   public pathList: Array<Ability> = [];
 
   public selected: Ability;
@@ -35,7 +37,7 @@ export class AbilityService {
   public getAbilityList(): Observable<any> {
     const url = this.abilityURL + `/${this.datasetService.selected.dbid}/${this.pathService.selected.voie}`;
     return this.http.get(url).pipe(
-      map(results => results['rs'])
+      map(results => results[this.resultSet])
     );
   }
 
