@@ -9,10 +9,16 @@
 
 <ion-content>
   <ion-list>
+    <ion-card *ngIf="notes != ''">
+      <ion-card-content>{{ notes }}</ion-card-content>
+    </ion-card>
     <ion-card *ngFor="let ability of (abilities | async)">
       <ion-card-header>
         <ion-card-title>{{ ability.rang }}. {{ ability.nom }}</ion-card-title>
-        <ion-card-subtitle>{{ ability.limitee == 1 ? "Action (L)imitée" : "" }}{{ ability.sort == 1 ? ", Sort" : "" }}
+        <ion-card-subtitle>
+          {{ ability.limitee == 1 ? "Action (L)imitée" : "" }}
+          {{ ability.limitee == 1 && ability.sort == 1 ? ", " : ""}}
+          {{ ability.sort == 1 ? "Sort" : "" }}
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>{{ ability.description }}</ion-card-content>

@@ -29,4 +29,5 @@ export class HomePage implements OnInit {
     this.datasetService.selected = dataset;
     this.router.navigateByUrl('/profiles');
   }
+
 }

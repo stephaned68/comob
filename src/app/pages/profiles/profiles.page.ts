@@ -38,4 +38,8 @@ export class ProfilesPage implements OnInit {
   homePage() {
     this.router.navigateByUrl('/home');
   }
+
+  showConfig() {
+    this.router.navigateByUrl('/config');
+  }
 }

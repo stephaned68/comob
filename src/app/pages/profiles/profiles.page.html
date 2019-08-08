@@ -4,6 +4,9 @@
       <ion-back-button text="Accueil" (click)="homePage()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
+    <ion-button color="dark" size="small" fill="clear" slot="end" (click)="showConfig()">
+      <ion-icon slot="icon-only" name="cog"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

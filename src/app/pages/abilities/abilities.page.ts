@@ -13,6 +13,8 @@ export class AbilitiesPage implements OnInit {
 
   public title: string;
 
+  public notes: string;
+
   public abilities: Observable<any>;
 
   constructor(
@@ -23,6 +25,7 @@ export class AbilitiesPage implements OnInit {
 
   ngOnInit() {
     this.title = this.pathService.selected.nom;
+    this.notes = this.pathService.selected.notes;
     this.getAbilityList();
   }
 
