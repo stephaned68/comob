@@ -13,7 +13,8 @@
 <ion-content>
   <ion-list>
     <ion-item button="true" *ngFor="let profile of (profiles | async)">
-      <ion-label (click)="showPaths(profile)">{{ profile.nom }}</ion-label>
+      <ion-label (click)="showPaths(profile)">{{ profile.nom }}
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

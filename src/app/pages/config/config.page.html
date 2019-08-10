@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="medium">
     <ion-buttons slot="start">
-      <ion-back-button text="Accueil" (click)="profilesPage()"></ion-back-button>
+      <ion-back-button text="Profils" (click)="profilesPage()"></ion-back-button>
     </ion-buttons>
     <ion-title>Configuration</ion-title>
   </ion-toolbar>
@@ -9,8 +9,15 @@
 
 <ion-content>
   <ion-list>
-    <ion-item button="true" *ngFor="let family of (families | async)">
+    <ion-item *ngFor="let family of (families | async)">
       <ion-label>{{ family.description }}</ion-label>
+      <ion-toggle [(ngModel)]="familyConfig[family.famille]"></ion-toggle>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" color="primary" (click)="saveConfig()">Valider</ion-button>
+  </ion-toolbar>
+</ion-footer>

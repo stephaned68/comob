@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FamilyService } from 'src/app/services/family.service';
+import { Storage } from '@ionic/storage';
+import { DatasetService } from 'src/app/services/dataset.service';
+import { FamilyService, Family } from 'src/app/services/family.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,12 +12,27 @@ import { Observable } from 'rxjs';
 })
 export class ConfigPage implements OnInit {
 
+  private configKey = `config.${this.datasetService.selected.dbid}`;
+
   public families: Observable<any>;
+
+  public familyList: Family[];
+
+  public familyConfig: {};
 
   constructor(
     private router: Router,
+    private storage: Storage,
+    private datasetService: DatasetService,
     private familyService: FamilyService
-  ) { }
+  ) {
+
+    this.storage.get(this.configKey)
+      .then((value) => {
+        this.familyConfig = value;
+      });
+
+  }
 
   ngOnInit() {
     this.getFamilyList();
@@ -23,10 +40,29 @@ export class ConfigPage implements OnInit {
 
   getFamilyList() {
     this.families = this.familyService.getFamilyList();
+    this.families
+      .subscribe(families => {
+        this.familyList = families as Family[];
+      });
+  }
+
+  ionViewDidEnter() {
+    if (!this.familyConfig) {
+      this.familyConfig = {};
+      for (const family of this.familyList) {
+        this.familyConfig[`${family.famille}`] = true;
+      }
+    }
   }
 
   profilesPage() {
     this.router.navigateByUrl('/profiles');
+  }
+
+  saveConfig() {
+    this.storage.set(this.configKey, this.familyConfig).then(() => {
+      this.router.navigateByUrl('/home');
+    });
   }
 
 }

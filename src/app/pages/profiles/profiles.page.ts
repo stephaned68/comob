@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DatasetService } from 'src/app/services/dataset.service';
-import { Observable } from 'rxjs';
-import { ProfileService, Profile } from 'src/app/services/profile.service';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs';
+import { DatasetService } from 'src/app/services/dataset.service';
+import { ProfileService, Profile } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profiles',
@@ -11,23 +12,32 @@ import { Router } from '@angular/router';
 })
 export class ProfilesPage implements OnInit {
 
+  private configKey = `config.${this.datasetService.selected.dbid}`;
+
   public title: string;
 
   public profiles: Observable<any>;
 
+  public familyConfig: {};
+
   constructor(
     private router: Router,
+    private storage: Storage,
     private datasetService: DatasetService,
     private profileService: ProfileService
   ) { }
 
   ngOnInit() {
     this.title = this.datasetService.selected.name;
-    this.getProfileList();
+    this.storage.get(this.configKey)
+      .then((value) => {
+        this.familyConfig = value;
+        this.getProfileList();
+      });
   }
 
   getProfileList() {
-    this.profiles = this.profileService.getProfileList();
+    this.profiles = this.profileService.getProfileList(this.familyConfig);
   }
 
   showPaths(profile: Profile) {
