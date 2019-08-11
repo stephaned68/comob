@@ -20,7 +20,7 @@ export class Ability {
 })
 export class AbilityService {
 
-  private abilityURL = 'http://co-api.alwaysdata.net/capacites';
+  private abilityURL = 'http://co-api.alwaysdata.net/abilities';
 
   private resultSet = 'rs';
 

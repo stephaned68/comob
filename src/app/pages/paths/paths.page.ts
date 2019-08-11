@@ -15,19 +15,32 @@ export class PathsPage implements OnInit {
 
   public paths: Observable<any>;
 
+  private pathType: number;
+
   constructor(
     private router: Router,
     private profileService: ProfileService,
     private pathService: PathService
-  ) { }
+  ) {
+
+    this.pathType = 0;
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.pathType = this.router.getCurrentNavigation().extras.state.pathType;
+    }
+
+  }
 
   ngOnInit() {
-    this.title = this.profileService.selected.nom;
+    if (this.profileService.selected !== null) {
+      this.title = this.profileService.selected.nom;
+    } else {
+      this.title = this.pathService.pathTypes[this.pathType];
+    }
     this.getPathList();
   }
 
   getPathList() {
-    this.paths = this.pathService.getPathList();
+    this.paths = this.pathService.getPathList(this.pathType);
   }
 
   showAbilities(path: Path) {

@@ -12,9 +12,25 @@
 
 <ion-content>
   <ion-list>
-    <ion-item button="true" *ngFor="let profile of (profiles | async)">
-      <ion-label (click)="showPaths(profile)">{{ profile.nom }}
-      </ion-label>
-    </ion-item>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Profils</ion-label>
+      </ion-item-divider>
+      <ion-item button="true" *ngFor="let profile of (profiles | async)">
+        <ion-label (click)="showProfilePaths(profile)">{{ profile.nom }}
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Autres voies</ion-label>
+      </ion-item-divider>
+      <ion-item button="true">
+        <ion-label (click)="showOtherPaths(1)">Raciales</ion-label>
+      </ion-item>
+      <ion-item button="true">
+        <ion-label (click)="showOtherPaths(2)">Prestige</ion-label>
+      </ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>

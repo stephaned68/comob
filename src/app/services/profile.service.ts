@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DatasetService } from './dataset.service';
-import { stringify } from '@angular/core/src/render3/util';
-import { fileURLToPath } from 'url';
 
 export class Profile {
   profil: string;
