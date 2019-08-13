@@ -8,6 +8,7 @@ export class Profile {
   profil: string;
   nom: string;
   famille: string;
+  description: string;
 }
 
 @Injectable({
