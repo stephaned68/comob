@@ -17,6 +17,13 @@ export class PathsPage implements OnInit {
 
   private pathType: number;
 
+  private pathTypes: string[] = [
+    'Profils',
+    'Raciales',
+    'Prestige'
+  ];
+
+
   constructor(
     private router: Router,
     private profileService: ProfileService,
@@ -34,7 +41,7 @@ export class PathsPage implements OnInit {
     if (this.profileService.selected !== null) {
       this.title = this.profileService.selected.nom;
     } else {
-      this.title = this.pathService.pathTypes[this.pathType];
+      this.title = this.pathTypes[this.pathType];
     }
     this.getPathList();
   }

@@ -25,11 +25,6 @@ export class PathService {
 
   public selected: Path;
 
-  public pathTypes: {
-    '1': 'Raciales',
-    '2': 'Prestige'
-  };
-
   constructor(
     private http: HttpClient,
     private datasetService: DatasetService,
