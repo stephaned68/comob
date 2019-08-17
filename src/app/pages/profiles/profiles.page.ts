@@ -18,6 +18,8 @@ export class ProfilesPage implements OnInit {
 
   public profiles: Observable<any>;
 
+  public hybrids: Observable<any>;
+
   public familyConfig: {};
 
   constructor(
@@ -33,11 +35,16 @@ export class ProfilesPage implements OnInit {
       .then((value) => {
         this.familyConfig = value;
         this.getProfileList();
+        this.getHybridList();
       });
   }
 
   getProfileList() {
     this.profiles = this.profileService.getProfileList(this.familyConfig);
+  }
+
+  getHybridList() {
+    this.hybrids = this.profileService.getProfileList(this.familyConfig, true);
   }
 
   showProfilePaths(profile: Profile) {

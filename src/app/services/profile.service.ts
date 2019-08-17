@@ -29,14 +29,22 @@ export class ProfileService {
     private datasetService: DatasetService
   ) { }
 
-  public getProfileList(familyConfig = {}): Observable<any> {
+  public getProfileList(familyConfig = {}, hybrid = false): Observable<any> {
     let filterIn = '';
     for (const family in familyConfig) {
       if (familyConfig[family]) {
-        filterIn += ((filterIn === '') ? '?family=' : ',') + encodeURI(family.trim());
+        filterIn += ((filterIn === '') ? 'family=' : ',') + encodeURI(family.trim());
       }
     }
-    const url = this.profileURL + `/${this.datasetService.selected.dbid}` + filterIn;
+
+    const type = 'type=' + ((hybrid) ? '1' : '0');
+
+    const args = [
+      filterIn,
+      type
+    ].join('&');
+
+    const url = this.profileURL + `/${this.datasetService.selected.dbid}` + '?' + args;
     console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])

@@ -8,6 +8,11 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-content>
+      Sélectionner les familles à afficher dans la liste des profils
+    </ion-card-content>
+  </ion-card>
   <ion-list>
     <ion-item *ngFor="let family of (families | async)">
       <ion-label>{{ family.description }}</ion-label>
