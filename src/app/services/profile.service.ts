@@ -30,21 +30,21 @@ export class ProfileService {
   ) { }
 
   public getProfileList(familyConfig = {}, hybrid = false): Observable<any> {
+    const args = [];
+
     let filterIn = '';
     for (const family in familyConfig) {
       if (familyConfig[family]) {
         filterIn += ((filterIn === '') ? 'family=' : ',') + encodeURI(family.trim());
       }
     }
+    if (filterIn !== '') {
+      args.push(filterIn);
+    }
 
-    const type = 'type=' + ((hybrid) ? '1' : '0');
+    args.push('type=' + ((hybrid) ? '1' : '0'));
 
-    const args = [
-      filterIn,
-      type
-    ].join('&');
-
-    const url = this.profileURL + `/${this.datasetService.selected.dbid}` + '?' + args;
+    const url = this.profileURL + `/${this.datasetService.selected.dbid}` + '?' + args.join('&');
     console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])

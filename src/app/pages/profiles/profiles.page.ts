@@ -12,7 +12,7 @@ import { ProfileService, Profile } from 'src/app/services/profile.service';
 })
 export class ProfilesPage implements OnInit {
 
-  private configKey = `config.${this.datasetService.selected.dbid}`;
+  private configKey = `comob.config.${this.datasetService.selected.dbid}.families`;
 
   public title: string;
 

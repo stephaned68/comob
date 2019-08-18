@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ConfigPage implements OnInit {
 
-  private configKey = `config.${this.datasetService.selected.dbid}`;
+  private configKey = `comob.config.${this.datasetService.selected.dbid}.families`;
 
   public families: Observable<any>;
 
