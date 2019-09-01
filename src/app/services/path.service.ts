@@ -12,6 +12,11 @@ export class Path {
   type: string;
 }
 
+export class PathType {
+  type_voie: string;
+  type_voie_intitule: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +24,11 @@ export class PathService {
 
   private pathURL = 'http://co-api.alwaysdata.net/paths';
 
+  private pathTypesURL = 'http://co-api.alwaysdata.net/types/paths';
+
   private resultSet = 'rs';
+
+  public pathTypes: Array<PathType> = [];
 
   public pathList: Array<Path> = [];
 
@@ -31,7 +40,7 @@ export class PathService {
     private profileService: ProfileService
   ) { }
 
-  public getPathList(pathType: number): Observable<any> {
+  public getPathList(pathType: string): Observable<any> {
     let path = '';
     if (this.profileService.selected !== null) {
       path = `/${this.profileService.selected.profil}`;
@@ -39,6 +48,14 @@ export class PathService {
       path = `/?type=${pathType}`;
     }
     const url = this.pathURL + `/${this.datasetService.selected.dbid}${path}`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      map(results => results[this.resultSet])
+    );
+  }
+
+  public getPathTypes(): Observable<any> {
+    const url = this.pathTypesURL + `/${this.datasetService.selected.dbid}`;
     console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])

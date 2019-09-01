@@ -23,27 +23,29 @@
         </ion-label>
       </ion-item>
     </ion-item-group>
-    <ion-item-group>
-      <ion-item-divider color="medium">
-        <ion-label>Hybrides</ion-label>
-      </ion-item-divider>
-      <ion-item button="true" *ngFor="let hybrid of (hybrids | async)">
-        <ion-label detail="true" (click)="showProfilePaths(hybrid)">
-          {{ hybrid.nom }}
-          <p size="small">({{ hybrid.description }})</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-group>
-    <ion-item-group>
-      <ion-item-divider color="medium">
-        <ion-label>Autres voies</ion-label>
-      </ion-item-divider>
-      <ion-item button="true">
-        <ion-label detail="true" (click)="showOtherPaths(1)">Raciales</ion-label>
-      </ion-item>
-      <ion-item button="true">
-        <ion-label detail="true" (click)="showOtherPaths(2)">Prestige</ion-label>
-      </ion-item>
-    </ion-item-group>
+    <div *ngIf="hybrids | async;let hybridList">
+      <ion-item-group *ngIf="hybridList.length > 0">
+        <ion-item-divider color="medium">
+          <ion-label>Hybrides</ion-label>
+        </ion-item-divider>
+        <ion-item button="true" *ngFor="let hybrid of hybridList">
+          <ion-label detail="true" (click)="showProfilePaths(hybrid)">
+            {{ hybrid.nom }}
+            <p size="small">({{ hybrid.description }})</p>
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <div *ngIf="pathTypes | async;let pathTypeList">
+      <ion-item-group *ngIf="pathTypeList.length > 0">
+        <ion-item-divider color="medium">
+          <ion-label>Autres voies</ion-label>
+        </ion-item-divider>
+        <ion-item button="true" *ngFor="let pathType of pathTypeList">
+          <ion-label detail="true" (click)="showOtherPaths(pathType)">{{ pathType.type_voie_intitule }}
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+    </div>
   </ion-list>
 </ion-content>

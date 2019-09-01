@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
 import { DatasetService } from 'src/app/services/dataset.service';
 import { ProfileService, Profile } from 'src/app/services/profile.service';
+import { PathService, PathType } from 'src/app/services/path.service';
 
 @Component({
   selector: 'app-profiles',
@@ -19,14 +20,19 @@ export class ProfilesPage implements OnInit {
   public profiles: Observable<any>;
 
   public hybrids: Observable<any>;
+  public hybridList: Observable<any>;
+
+  public pathTypes: Observable<any>;
+  public pathTypeList: Observable<any>;
 
   public familyConfig: {};
 
   constructor(
     private router: Router,
     private storage: Storage,
-    private datasetService: DatasetService,
-    private profileService: ProfileService
+    public datasetService: DatasetService,
+    public profileService: ProfileService,
+    public pathService: PathService
   ) { }
 
   ngOnInit() {
@@ -37,6 +43,7 @@ export class ProfilesPage implements OnInit {
         this.getProfileList();
         this.getHybridList();
       });
+    this.getPathTypes();
   }
 
   getProfileList() {
@@ -47,12 +54,16 @@ export class ProfilesPage implements OnInit {
     this.hybrids = this.profileService.getProfileList(this.familyConfig, true);
   }
 
+  getPathTypes() {
+    this.pathTypes = this.pathService.getPathTypes();
+  }
+
   showProfilePaths(profile: Profile) {
     this.profileService.selected = profile;
     this.router.navigateByUrl('/paths');
   }
 
-  showOtherPaths(type: number) {
+  showOtherPaths(type: PathType) {
     this.profileService.selected = null;
     const navExtras: NavigationExtras = {
       state: {
