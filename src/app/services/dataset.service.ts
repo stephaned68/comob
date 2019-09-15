@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GlobalService } from './global.service';
 
 export class Dataset {
   dbid: string;
@@ -15,11 +16,16 @@ export class Dataset {
 })
 export class DatasetService {
 
-  private datasetURL = 'http://co-api.alwaysdata.net/datasets';
+  private datasetURL: string;
 
   private resultSet = 'rs';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private global: GlobalService
+  ) {
+    this.datasetURL = this.global.serviceURL + '/datasets';
+  }
 
   public datasetList: Array<Dataset> = [];
 

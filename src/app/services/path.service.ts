@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DatasetService } from './dataset.service';
 import { ProfileService } from './profile.service';
+import { GlobalService } from './global.service';
 
 export class Path {
   voie: string;
@@ -22,9 +23,9 @@ export class PathType {
 })
 export class PathService {
 
-  private pathURL = 'http://co-api.alwaysdata.net/paths';
+  private pathURL: string;
 
-  private pathTypesURL = 'http://co-api.alwaysdata.net/types/paths';
+  private pathTypesURL: string;
 
   private resultSet = 'rs';
 
@@ -36,9 +37,13 @@ export class PathService {
 
   constructor(
     private http: HttpClient,
+    private global: GlobalService,
     private datasetService: DatasetService,
     private profileService: ProfileService
-  ) { }
+  ) {
+    this.pathURL = this.global.serviceURL + '/paths';
+    this.pathTypesURL = this.global.serviceURL + '/types/paths';
+  }
 
   public getPathList(pathType: string): Observable<any> {
     let path = '';

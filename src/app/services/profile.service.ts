@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DatasetService } from './dataset.service';
+import { GlobalService } from './global.service';
 
 export class Profile {
   profil: string;
@@ -16,7 +17,7 @@ export class Profile {
 })
 export class ProfileService {
 
-  private profileURL = 'http://co-api.alwaysdata.net/profiles';
+  private profileURL: string;
 
   private resultSet = 'rs';
 
@@ -26,8 +27,11 @@ export class ProfileService {
 
   constructor(
     private http: HttpClient,
+    private global: GlobalService,
     private datasetService: DatasetService
-  ) { }
+  ) {
+    this.profileURL = this.global.serviceURL + '/profiles';
+  }
 
   public getProfileList(familyConfig = {}, hybrid = false): Observable<any> {
     const args = [];

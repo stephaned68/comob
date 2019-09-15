@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatasetService } from './dataset.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GlobalService } from './global.service';
 
 export class Family {
   famille: string;
@@ -14,7 +15,7 @@ export class Family {
 })
 export class FamilyService {
 
-  private familyURL = 'http://co-api.alwaysdata.net/families';
+  private familyURL: string;
 
   private resultSet = 'rs';
 
@@ -22,8 +23,11 @@ export class FamilyService {
 
   constructor(
     private http: HttpClient,
+    private global: GlobalService,
     private datasetService: DatasetService,
-  ) { }
+  ) {
+    this.familyURL = this.global.serviceURL + '/families';
+  }
 
   public getFamilyList(): Observable<any> {
     const url = this.familyURL + `/${this.datasetService.selected.dbid}`;

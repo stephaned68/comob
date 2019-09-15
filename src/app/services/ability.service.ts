@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PathService } from './path.service';
 import { DatasetService } from './dataset.service';
+import { GlobalService } from './global.service';
 
 export class Ability {
   rang: string;
@@ -20,7 +21,7 @@ export class Ability {
 })
 export class AbilityService {
 
-  private abilityURL = 'http://co-api.alwaysdata.net/abilities';
+  private abilityURL: string;
 
   private resultSet = 'rs';
 
@@ -30,9 +31,12 @@ export class AbilityService {
 
   constructor(
     private http: HttpClient,
+    private global: GlobalService,
     private datasetService: DatasetService,
     private pathService: PathService
-  ) { }
+  ) {
+    this.abilityURL = this.global.serviceURL + '/abilities';
+  }
 
   public getAbilityList(): Observable<any> {
     const url = this.abilityURL + `/${this.datasetService.selected.dbid}/${this.pathService.selected.voie}`;
