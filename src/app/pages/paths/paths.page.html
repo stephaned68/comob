@@ -10,7 +10,10 @@
 <ion-content>
   <ion-list>
     <ion-item button="true" *ngFor="let path of (paths | async)">
-      <ion-label (click)="showAbilities(path)">{{ path.nom }}</ion-label>
+      <ion-label (click)="showAbilities(path)">
+        {{ path.nom }}
+        <p size="small" *ngIf="path.type_voie_intitule != null">({{ path.type_voie_intitule }})</p>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
