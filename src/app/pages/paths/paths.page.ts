@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { PathService, Path, PathType } from 'src/app/services/path.service';
+import { EquipmentBaseService } from 'src/app/services/equipmentbase.service';
 
 @Component({
   selector: 'app-paths',
@@ -17,10 +18,13 @@ export class PathsPage implements OnInit {
 
   private pathType: PathType;
 
+  public equipments: Observable<any>;
+
   constructor(
     private router: Router,
-    private profileService: ProfileService,
-    private pathService: PathService
+    public profileService: ProfileService,
+    private pathService: PathService,
+    public EquipmentBaseService: EquipmentBaseService
   ) {
 
     this.pathType = null;
@@ -33,6 +37,7 @@ export class PathsPage implements OnInit {
   ngOnInit() {
     if (this.profileService.selected !== null) {
       this.title = this.profileService.selected.nom;
+      this.getEquipmentList();
     } else {
       this.title = this.pathType.type_voie_intitule;
     }
@@ -45,6 +50,11 @@ export class PathsPage implements OnInit {
       type = this.pathType.type_voie;
     }
     this.paths = this.pathService.getPathList(type);
+  }
+
+  getEquipmentList() {
+    this.EquipmentBaseService.profile = this.profileService.selected.profil;
+    this.equipments = this.EquipmentBaseService.getEquipmentList();
   }
 
   showAbilities(path: Path) {

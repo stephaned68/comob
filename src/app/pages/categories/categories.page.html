@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Profils" (click)="profilesPage()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button="true" *ngFor="let subCategory of (subCategories | async)">
+      <ion-label (click)="showEquipmentList(subCategory)">
+        {{ subCategory.libelle }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

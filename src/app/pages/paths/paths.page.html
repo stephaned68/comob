@@ -9,10 +9,24 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header color="medium" *ngIf="profileService.selected != null">Voies</ion-list-header>
     <ion-item button="true" *ngFor="let path of (paths | async)">
       <ion-label (click)="showAbilities(path)">
         {{ path.nom }}
         <p size="small" *ngIf="path.type_voie_intitule != null">({{ path.type_voie_intitule }})</p>
+      </ion-label>
+    </ion-item>
+    <ion-list-header color="medium" *ngIf="profileService.selected != null">Equipement de départ</ion-list-header>
+    <ion-item *ngFor="let equipment of (equipments | async)">
+      <ion-label>
+        <h5>
+          {{ equipment.special || equipment.designation }} {{ equipment.nombre > 1 ? "(" + equipment.nombre + ")" : ""}}
+        </h5>
+        <div *ngIf="equipment.props != ''">
+          <span *ngFor="let prop of equipment.props.split('~')">
+            <ion-badge color="medium">{{ prop }}</ion-badge>&nbsp;
+          </span>
+        </div>
       </ion-label>
     </ion-item>
   </ion-list>

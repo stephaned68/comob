@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="Voies" (click)="pathsPage()"></ion-back-button>
+      <ion-back-button text="{{ backButton }}" (click)="backPage()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
@@ -9,13 +9,13 @@
 
 <ion-content>
   <ion-list>
-    <ion-card *ngIf="notes != ''">
+    <ion-card *ngIf="notes != null && notes != ''">
       <ion-card-content>{{ notes }}</ion-card-content>
     </ion-card>
     <ion-card *ngFor="let ability of (abilities | async)">
       <ion-card-header>
         <ion-card-title>
-          {{ ability.rang }}. {{ ability.nom }} {{ ability.limitee == 1 ? '(L)' : ''}}{{ ability.sort == 1 ? '*' : ''}}
+          <span *ngIf="ability.rang != null && ability.rang > 0">{{ ability.rang }}.</span> {{ ability.nom }} {{ ability.limitee == 1 ? '(L)' : ''}}{{ ability.sort == 1 ? '*' : ''}}
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>{{ ability.description }}</ion-card-content>

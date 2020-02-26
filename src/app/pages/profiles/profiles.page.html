@@ -47,5 +47,24 @@
         </ion-item>
       </ion-item-group>
     </div>
+    <div *ngIf="datasetService.selected.showAbilities; let showAbilities">
+      <ion-item-group *ngIf="showAbilities.length > 0">
+        <ion-item-divider color="medium">
+          <ion-label>Autres capacités</ion-label>
+        </ion-item-divider>
+        <ion-item button="true" *ngFor="let showAbility of showAbilities">
+          <ion-label detail="true" (click)="showOtherAbilities(showAbility)">{{ showAbility.label }}
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <ion-item-divider color="medium">
+      <ion-label>Equipement</ion-label>
+    </ion-item-divider>
+    <ion-item button="true" *ngFor="let category of (categories | async)">
+      <ion-label detail="true" (click)="showSubCategories(category)">
+        {{ category.libelle }}
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

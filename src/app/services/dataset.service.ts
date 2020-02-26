@@ -7,8 +7,13 @@ import { GlobalService } from './global.service';
 export class Dataset {
   dbid: string;
   name: string;
-  font: string;
-  colors: any;
+  showAbilities: Array<AbilityType>;
+  currency: string;
+}
+
+export class AbilityType {
+  type: string;
+  label: string;
 }
 
 @Injectable({

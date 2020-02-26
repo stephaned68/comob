@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PathService } from './path.service';
-import { DatasetService } from './dataset.service';
+import { DatasetService, AbilityType } from './dataset.service';
 import { GlobalService } from './global.service';
 
 export class Ability {
@@ -38,8 +38,14 @@ export class AbilityService {
     this.abilityURL = this.global.serviceURL + '/abilities';
   }
 
-  public getAbilityList(): Observable<any> {
-    const url = this.abilityURL + `/${this.datasetService.selected.dbid}/${this.pathService.selected.voie}`;
+  public getAbilityList(abilityType: AbilityType): Observable<any> {
+    let url: string;
+    if (abilityType == null) {
+      url = this.abilityURL + `/${this.datasetService.selected.dbid}/${this.pathService.selected.voie}`;
+    } else {
+      url = this.abilityURL + `/${this.datasetService.selected.dbid}?type=${abilityType.type}`;
+    }
+    console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])
     );
