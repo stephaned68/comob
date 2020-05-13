@@ -5,11 +5,15 @@ import { map } from 'rxjs/operators';
 import { DatasetService } from './dataset.service';
 import { GlobalService } from './global.service';
 
+export class Trait {
+  intitule: string;
+  description: string;
+}
 export class Profile {
   profil: string;
   nom: string;
-  famille: string;
   description: string;
+  famille: string;
 }
 
 @Injectable({
@@ -18,6 +22,7 @@ export class Profile {
 export class ProfileService {
 
   private profileURL: string;
+  private traitsURL: string;
 
   private resultSet = 'rs';
 
@@ -31,6 +36,7 @@ export class ProfileService {
     private datasetService: DatasetService
   ) {
     this.profileURL = this.global.serviceURL + '/profiles';
+    this.traitsURL = this.global.serviceURL + '/traits';
   }
 
   public getProfileList(familyConfig = {}, hybrid = false): Observable<any> {
@@ -48,7 +54,15 @@ export class ProfileService {
 
     args.push('type=' + ((hybrid) ? '1' : '0'));
 
-    const url = this.profileURL + `/${this.datasetService.selected.dbid}` + '?' + args.join('&');
+    const url = this.profileURL + `/${this.datasetService.selected.dbid}?` + args.join('&');
+    console.log(url);
+    return this.http.get(url).pipe(
+      map(results => results[this.resultSet])
+    );
+  }
+
+  public getTraitList(): Observable<any> {
+    const url = this.traitsURL + `/${this.datasetService.selected.dbid}?profile=${this.selected.profil}`;
     console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])

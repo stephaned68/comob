@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AbilityType } from 'src/app/services/dataset.service';
 import { PathService } from 'src/app/services/path.service';
 import { AbilityService } from 'src/app/services/ability.service';
+import { RaceService } from 'src/app/services/race.service';
 
 @Component({
   selector: 'app-abilities',
@@ -20,14 +21,21 @@ export class AbilitiesPage implements OnInit {
 
   public abilityType: AbilityType;
 
-  public abilities: Observable<any>;
+  public abilities$: Observable<any>;
+
+  public race$: Observable<any>;
+
+  public traits$: Observable<any>;
+
+  public racials$: Observable<any>;
 
   public navBack: string;
 
   constructor(
     private router: Router,
     private pathService: PathService,
-    private abilityService: AbilityService
+    private abilityService: AbilityService,
+    private raceService: RaceService
   ) {
 
     this.abilityType = null;
@@ -49,10 +57,29 @@ export class AbilitiesPage implements OnInit {
       this.title = this.abilityType.label;
     }
     this.getAbilityList();
+    this.getRace();
+    this.getRacialTraits();
+    this.getRacialAbilities();
   }
 
   getAbilityList() {
-    this.abilities = this.abilityService.getAbilityList(this.abilityType);
+    this.abilities$ = this.abilityService.getAbilityList(this.abilityType);
+  }
+
+  getRace() {
+    this.race$ = this.raceService.getRace();
+  }
+
+  getRacialTraits() {
+    if (this.race$ !== null) {
+      this.traits$ = this.raceService.getTraitsList();
+    }
+  }
+
+  getRacialAbilities() {
+    if (this.race$ !== null) {
+      this.racials$ = this.raceService.getAbilityList();
+    }
   }
 
   backPage() {

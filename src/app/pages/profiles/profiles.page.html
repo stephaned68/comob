@@ -19,7 +19,7 @@
       <ion-item button="true" *ngFor="let profile of (profiles | async)">
         <ion-label detail="true" (click)="showProfilePaths(profile)">
           {{ profile.nom }}
-          <p size="small">({{ profile.description }})</p>
+          <p size="small">({{ profile.famille.libelle }})</p>
         </ion-label>
       </ion-item>
     </ion-item-group>
@@ -31,7 +31,7 @@
         <ion-item button="true" *ngFor="let hybrid of hybridList">
           <ion-label detail="true" (click)="showProfilePaths(hybrid)">
             {{ hybrid.nom }}
-            <p size="small">({{ hybrid.description }})</p>
+            <p size="small">({{ hybrid.famille.libelle }})</p>
           </ion-label>
         </ion-item>
       </ion-item-group>

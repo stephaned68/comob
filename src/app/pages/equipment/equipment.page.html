@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let equipment of (equipments | async)">
+    <ion-item *ngFor="let equipment of (equipments|async)">
       <ion-card>
         <ion-card-header>
           <ion-card-title>{{ equipment.designation }}</ion-card-title>
@@ -17,11 +17,11 @@
         </ion-card-header>
         <ion-card-content>
           <div *ngIf="equipment.props != ''">
-            <span *ngFor="let prop of equipment.props.split('~')">
-              <ion-badge color="medium">{{ prop }}</ion-badge>&nbsp;
+            <span *ngFor="let prop of equipment.props">
+              <ion-badge color="medium">{{ prop.nom }} : {{ prop.valeur }}</ion-badge>&nbsp;
             </span>
           </div>
-          <p size="x-small">{{ equipment.notes }}</p>
+          <p size="x-small" class="ion-text-justify">{{ equipment.notes }}</p>
         </ion-card-content>
       </ion-card>
     </ion-item>

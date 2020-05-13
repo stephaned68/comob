@@ -38,6 +38,10 @@ export class AbilityService {
     this.abilityURL = this.global.serviceURL + '/abilities';
   }
 
+  public getAbilityURL(): string {
+    return this.abilityURL;
+  }
+
   public getAbilityList(abilityType: AbilityType): Observable<any> {
     let url: string;
     if (abilityType == null) {
@@ -45,7 +49,6 @@ export class AbilityService {
     } else {
       url = this.abilityURL + `/${this.datasetService.selected.dbid}?type=${abilityType.type}`;
     }
-    console.log(url);
     return this.http.get(url).pipe(
       map(results => results[this.resultSet])
     );

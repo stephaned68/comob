@@ -14,17 +14,19 @@ export class PathsPage implements OnInit {
 
   public title: string;
 
-  public paths: Observable<any>;
+  public paths$: Observable<any>;
 
   private pathType: PathType;
 
-  public equipments: Observable<any>;
+  public equipments$: Observable<any>;
+
+  public traits$: Observable<any>;
 
   constructor(
     private router: Router,
     public profileService: ProfileService,
     private pathService: PathService,
-    public EquipmentBaseService: EquipmentBaseService
+    public equipmentBaseService: EquipmentBaseService
   ) {
 
     this.pathType = null;
@@ -38,6 +40,7 @@ export class PathsPage implements OnInit {
     if (this.profileService.selected !== null) {
       this.title = this.profileService.selected.nom;
       this.getEquipmentList();
+      this.getTraitList();
     } else {
       this.title = this.pathType.type_voie_intitule;
     }
@@ -49,12 +52,16 @@ export class PathsPage implements OnInit {
     if (this.pathType) {
       type = this.pathType.type_voie;
     }
-    this.paths = this.pathService.getPathList(type);
+    this.paths$ = this.pathService.getPathList(type);
   }
 
   getEquipmentList() {
-    this.EquipmentBaseService.profile = this.profileService.selected.profil;
-    this.equipments = this.EquipmentBaseService.getEquipmentList();
+    this.equipmentBaseService.profile = this.profileService.selected.profil;
+    this.equipments$ = this.equipmentBaseService.getEquipmentList();
+  }
+
+  getTraitList() {
+    this.traits$ = this.profileService.getTraitList();
   }
 
   showAbilities(path: Path) {

@@ -9,16 +9,69 @@
 
 <ion-content>
   <ion-list>
-    <ion-card *ngIf="notes != null && notes != ''">
-      <ion-card-content>{{ notes }}</ion-card-content>
+    <ion-card *ngFor="let race of (race$ | async)">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-badge color="medium" *ngIf="race?.mod_for !== null">
+            FOR : {{ race?.mod_for > 0 ? '+' : '' }}{{ race?.mod_for }}
+          </ion-badge>
+          <span *ngIf="race?.mod_for !== null">&nbsp;</span>
+          <ion-badge color="medium" *ngIf="race?.mod_dex !== null">
+            DEX : {{ race?.mod_dex > 0 ? '+' : '' }}{{ race?.mod_dex }}
+          </ion-badge>
+          <span *ngIf="race?.mod_dex !== null">&nbsp;</span>
+          <ion-badge color="medium" *ngIf="race?.mod_con !== null">
+            CON : {{ race?.mod_con > 0 ? '+' : '' }}{{ race?.mod_con }}
+          </ion-badge>
+          <span *ngIf="race?.mod_con !== null">&nbsp;</span>
+          <ion-badge color="medium" *ngIf="race?.mod_int !== null">
+            INT : {{ race?.mod_int > 0 ? '+' : '' }}{{ race?.mod_int }}
+          </ion-badge>
+          <span *ngIf="race?.mod_int !== null">&nbsp;</span>
+          <ion-badge color="medium" *ngIf="race?.mod_sag !== null">
+            SAG : {{ race?.mod_sag > 0 ? '+' : '' }}{{ race?.mod_sag }}
+          </ion-badge>
+          <span *ngIf="race?.mod_sag !== null">&nbsp;</span>
+          <ion-badge color="medium" *ngIf="race?.mod_cha !== null">
+            CHA : {{ race?.mod_cha > 0 ? '+' : '' }}{{ race?.mod_cha }}
+          </ion-badge><br>
+          <ion-badge color="medium">
+            Âge : {{ race?.age_base}}+ (max : {{ race?.esperance_vie }})&nbsp;
+          </ion-badge><br>
+          <ion-badge color="medium">
+            Taille : {{ race?.taille_min | number:'1.2-2' }}-{{ race?.taille_max | number:'1.2-2' }} m&nbsp;
+          </ion-badge><br>
+          <ion-badge color="medium">
+            Poids : {{ race?.poids_min }}-{{ race?.poids_max }} kg&nbsp;
+          </ion-badge><br>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p size="x-small" class="ion-text-justify" *ngFor="let trait of (traits$ | async)">
+          <strong>{{ trait.intitule }}</strong> : {{ trait.description }}
+        </p>
+      </ion-card-content>
     </ion-card>
-    <ion-card *ngFor="let ability of (abilities | async)">
+    <ion-card *ngIf="(racials$ | async) as racials">
+      <ion-card-content>
+        <p size="x-small" class="ion-text-justify" *ngFor="let racial of racials">
+          <strong>{{ racial.limitation === 1 ? 'Limitation raciale' : 'Capacité raciale' }} &#8226; {{ racial.capacite }}</strong> : {{ racial.description }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="notes != null && notes != ''">
+      <ion-card-content class="ion-text-justify" [innerHTML]="notes | formatNotes">
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let ability of (abilities$ | async)">
       <ion-card-header>
         <ion-card-title>
           <span *ngIf="ability.rang != null && ability.rang > 0">{{ ability.rang }}.</span> {{ ability.nom }} {{ ability.limitee == 1 ? '(L)' : ''}}{{ ability.sort == 1 ? '*' : ''}}
         </ion-card-title>
       </ion-card-header>
-      <ion-card-content>{{ ability.description }}</ion-card-content>
+      <ion-card-content>
+        <div class="ion-text-justify">{{ ability.description }}</div>
+      </ion-card-content>
     </ion-card>
   </ion-list>
 </ion-content>

@@ -5,12 +5,17 @@ import { map } from 'rxjs/operators';
 import { DatasetService } from './dataset.service';
 import { GlobalService } from './global.service';
 
+export class EquipmentProperty {
+  id: string;
+  nom: string;
+  valeur: string;
+}
 export class EquipmentBase {
   code: string;
   designation: string;
   nombre: number;
   special: string;
-  props: string;
+  props: Array<EquipmentProperty>;
 }
 
 @Injectable({

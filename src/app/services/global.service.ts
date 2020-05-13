@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,7 @@ export class GlobalService {
 
   constructor() {
 
-    //this.serviceURL = 'http://co-api.alwaysdata.net';
-    this.serviceURL = 'http://localhost:8800';
+    this.serviceURL = environment.serviceURL;
 
   }
 }
