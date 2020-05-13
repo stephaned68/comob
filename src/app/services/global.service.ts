@@ -10,6 +10,7 @@ export class GlobalService {
 
   constructor() {
 
+    console.log(environment);
     this.serviceURL = environment.serviceURL;
 
   }
