@@ -1,7 +1,14 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar
+    class="ion-color"
+    [style.backgroundColor]="datasetService.getTitleColor()"
+    [style.color]="datasetService.getTextColor()"
+  >
     <ion-buttons slot="start">
-      <ion-back-button text="Profils" (click)="profilesPage()"></ion-back-button>
+      <ion-back-button
+        text="Profils"
+        (click)="profilesPage()"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>

@@ -1,10 +1,20 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar
+    class="ion-color"
+    [style.backgroundColor]="datasetService.getTitleColor()"
+    [style.color]="datasetService.getTextColor()"
+  >
     <ion-buttons slot="start">
       <ion-back-button text="Accueil" (click)="homePage()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
-    <ion-button color="dark" size="small" fill="clear" slot="end" (click)="showConfig()">
+    <ion-button
+      color="dark"
+      size="small"
+      fill="clear"
+      slot="end"
+      (click)="showConfig()"
+    >
       <ion-icon slot="icon-only" name="settings"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -42,7 +52,8 @@
           <ion-label>Autres voies</ion-label>
         </ion-item-divider>
         <ion-item button="true" *ngFor="let pathType of pathTypeList">
-          <ion-label detail="true" (click)="showOtherPaths(pathType)">{{ pathType.type_voie_intitule }}
+          <ion-label detail="true" (click)="showOtherPaths(pathType)"
+            >{{ pathType.type_voie_intitule }}
           </ion-label>
         </ion-item>
       </ion-item-group>
@@ -53,7 +64,8 @@
           <ion-label>Autres capacités</ion-label>
         </ion-item-divider>
         <ion-item button="true" *ngFor="let showAbility of showAbilities">
-          <ion-label detail="true" (click)="showOtherAbilities(showAbility)">{{ showAbility.label }}
+          <ion-label detail="true" (click)="showOtherAbilities(showAbility)"
+            >{{ showAbility.label }}
           </ion-label>
         </ion-item>
       </ion-item-group>

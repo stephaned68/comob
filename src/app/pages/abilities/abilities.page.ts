@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AbilityType } from 'src/app/services/dataset.service';
+import { DatasetService, AbilityType } from 'src/app/services/dataset.service';
 import { PathService } from 'src/app/services/path.service';
 import { AbilityService } from 'src/app/services/ability.service';
 import { RaceService } from 'src/app/services/race.service';
@@ -33,6 +33,7 @@ export class AbilitiesPage implements OnInit {
 
   constructor(
     private router: Router,
+    public datasetService: DatasetService,
     private pathService: PathService,
     private abilityService: AbilityService,
     private raceService: RaceService

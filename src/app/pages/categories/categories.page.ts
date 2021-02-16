@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { DatasetService } from 'src/app/services/dataset.service';
 import { CategoryService, Category } from 'src/app/services/category.service';
 import { EquipmentService } from 'src/app/services/equipment.service';
 
@@ -17,6 +18,7 @@ export class CategoriesPage implements OnInit {
 
   constructor(
     private router: Router,
+    public datasetService: DatasetService,
     public categoryService: CategoryService,
     public equipmentService: EquipmentService
   ) { }

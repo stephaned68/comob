@@ -9,6 +9,12 @@ export class Dataset {
   name: string;
   showAbilities: Array<AbilityType>;
   currency: string;
+  colors: Colors;
+}
+
+export class Colors {
+  title: string;
+  text: string;
 }
 
 export class AbilityType {
@@ -40,5 +46,13 @@ export class DatasetService {
     return this.http.get(this.datasetURL).pipe(
       map(results => results[this.resultSet])
     );
+  }
+
+  public getTitleColor(): string {
+    return this.selected && this.selected.colors && this.selected.colors.title || '#fff';
+  }
+
+  public getTextColor(): string {
+    return this.selected && this.selected.colors && this.selected.colors.text || '#000';
   }
 }

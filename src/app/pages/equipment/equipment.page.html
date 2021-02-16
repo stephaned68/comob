@@ -1,7 +1,14 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar
+    class="ion-color"
+    [style.backgroundColor]="datasetService.getTitleColor()"
+    [style.color]="datasetService.getTextColor()"
+  >
     <ion-buttons slot="start">
-      <ion-back-button text="Catégories" (click)="categoriesPage()"></ion-back-button>
+      <ion-back-button
+        text="Catégories"
+        (click)="categoriesPage()"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
@@ -13,12 +20,16 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>{{ equipment.designation }}</ion-card-title>
-          <ion-card-subtitle>Prix : {{ equipment.prix }} {{ currency }}</ion-card-subtitle>
+          <ion-card-subtitle
+            >Prix : {{ equipment.prix }} {{ currency }}</ion-card-subtitle
+          >
         </ion-card-header>
         <ion-card-content>
           <div *ngIf="equipment.props != ''">
             <span *ngFor="let prop of equipment.props">
-              <ion-badge color="medium">{{ prop.nom }} : {{ prop.valeur }}</ion-badge>&nbsp;
+              <ion-badge color="medium"
+                >{{ prop.nom }} : {{ prop.valeur }}</ion-badge
+              >&nbsp;
             </span>
           </div>
           <p size="x-small" class="ion-text-justify">{{ equipment.notes }}</p>

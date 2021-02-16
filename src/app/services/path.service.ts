@@ -19,10 +19,9 @@ export class PathType {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PathService {
-
   private pathURL: string;
 
   private pathTypesURL: string;
@@ -54,16 +53,12 @@ export class PathService {
     }
     const url = this.pathURL + `/${this.datasetService.selected.dbid}${path}`;
     console.log(url);
-    return this.http.get(url).pipe(
-      map(results => results[this.resultSet])
-    );
+    return this.http.get(url).pipe(map((results) => results[this.resultSet]));
   }
 
   public getPathTypes(): Observable<any> {
     const url = this.pathTypesURL + `/${this.datasetService.selected.dbid}`;
     console.log(url);
-    return this.http.get(url).pipe(
-      map(results => results[this.resultSet])
-    );
+    return this.http.get(url).pipe(map((results) => results[this.resultSet]));
   }
 }

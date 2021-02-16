@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { DatasetService } from 'src/app/services/dataset.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { PathService, Path, PathType } from 'src/app/services/path.service';
 import { EquipmentBaseService } from 'src/app/services/equipmentbase.service';
+
 
 @Component({
   selector: 'app-paths',
@@ -24,6 +26,7 @@ export class PathsPage implements OnInit {
 
   constructor(
     private router: Router,
+    public datasetService: DatasetService,
     public profileService: ProfileService,
     private pathService: PathService,
     public equipmentBaseService: EquipmentBaseService

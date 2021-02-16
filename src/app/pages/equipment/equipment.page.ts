@@ -19,7 +19,7 @@ export class EquipmentPage implements OnInit {
 
   constructor(
     private router: Router,
-    private datasetService: DatasetService,
+    public datasetService: DatasetService,
     private equipmentService: EquipmentService
   ) { }
 
