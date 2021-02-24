@@ -17,6 +17,9 @@ export class FormatNotes implements PipeTransform {
         title = `<strong>${line.split(':')[0]}:</strong>`;
         line = line.split(':')[1];
       }
+      while (line.indexOf('&#39;') !== -1)  {
+        line.replace('&#39;', "'");
+      }
       notes += `<p>${title}${line}</p>`;
     }
     return notes;
